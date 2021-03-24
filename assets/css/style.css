@@ -1,0 +1,18 @@
+body {
+    font-family: 'Cormorant', serif;
+    font-weight: 'bold';
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .lobster {
+    font-family: 'Lobster', cursive;
+    color: white;
+    font-size: 72px;
+    text-shadow: -4px 0 red, 0 4px red, 4px 0 red, 0 -4px red;
+  }
+
+  .gradhead {
+    background: #ff9a00;
+    background: linear-gradient(90deg, #ff9a00 0%, #ffc900 30%, #ffef00 100%);
+  }
