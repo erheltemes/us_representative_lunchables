@@ -4,12 +4,81 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>How Many Lunchables</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@600&family=Lobster&display=swap" rel="stylesheet">  
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Who's Bringing Snacks?</title>
 </head>
-<body> 
-    <main>
+<body>
+    <div class="container-fluid dots">
+        <div class="jumbotron jumbotron-fluid gradhead">
+            <div class="container ">
+                <h1 class="display-4 text-center lobster">How Many Lunchables?</h1>
+                <p class="lobsterTitle w-50 p-3 mx-auto text-center mt-1">An interactive experience to illustrate wealth distribution comparisons between elected officials and their constituents.</p>
+            </div>
+        </div>
+    </div> 
 
-    </main>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-9 mx-auto lobsterOrder mt-4">
+                <h2 class="text-center">First, choose your state:</h2>
+            </div>
+            <div class="col-9 mx-auto mb-3" id="map">
+                <div class="row">
+
+                </div>
+            </div>
+            <div class="mx-auto" id="repList">
+                <div class="mx-auto mt-5 mb-5">
+                    <h2 class="text-center lobsterOrder">Next, choose a representative:</h2>
+                    <div class="btn-group dropright text-center">
+                        <button class="btn btn-primary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Representative List
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">This will be populated with names</a>
+                            <a class="dropdown-item" href="#">Create in js, remove from HTML when ready</a>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>        
+        <div class="row">
+            <div class="container mx-auto">
+                <div class="col-9 mx-auto lobsterOrder mt-4">
+                    <h2 class="text-center">Now, choose an item:</h2>
+                </div>
+                <div class="row mx-auto">
+                    <div class="tile col-12 col-md-4 p-2 mx-auto border border-primary" id="tileOne">1-append a button and an img tag <button><img></button> onto each tile</div>
+                    <div class="tile col-12 col-md-4 p-2 mx-auto border border-primary" id="tileTwo">2 resize to ensure all pictures are even</div>
+                    <div class="tile col-12 col-md-4 p-2 mx-auto border border-primary" id="tileThree">3 no text, only images, add alt tags in all</div>
+                    <!-- this container will hold where the flexed picture cards featuring Walmart items will appear -->
+                    <!-- tiles should contain a picture that when clicked, calculates the the number you could buy and puts that -->
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="container mx-auto">
+                <div class="mx-auto lobsterOrder mt-4">
+                    <h2 class="text-center">How many lunchables?</h2>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-12 border border-primary" id="chosenImage">Image of item that's being compared</div>
+                    <div class="col-md-8 col-12 border border-primary" id="resultList">
+                        <p>(rep. x from location y), could buy (net worth/item price) using their net worth</p>
+                        <p>The average constituent in (state) could buy (average net worth from state/item price)</p>
+                        <!-- these p tags should live in the js, not the html, and should be created after the item is chosen -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="assets/html5usmapv4.0_branded/mapdata.js"></script>     
+    <script  type="text/javascript" src="assets/html5usmapv4.0_branded/usmap.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     <script src="assets/js/script.js"></script>
 </body>
 </html>
