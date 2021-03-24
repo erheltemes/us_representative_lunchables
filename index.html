@@ -11,42 +11,66 @@
     <title>Who's Bringing Snacks?</title>
 </head>
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid dots">
         <div class="jumbotron jumbotron-fluid gradhead">
             <div class="container ">
                 <h1 class="display-4 text-center lobster">How Many Lunchables?</h1>
+                <p class="lobsterTitle w-50 p-3 mx-auto text-center mt-1">An interactive experience to illustrate wealth distribution comparisons between elected officials and their constituents.</p>
             </div>
         </div>
     </div> 
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-8 col-12" id="map">
+            <div class="col-9 mx-auto lobsterOrder mt-4">
+                <h2 class="text-center">First, choose your state:</h2>
+            </div>
+            <div class="col-9 mx-auto mb-3" id="map">
                 <div class="row">
 
                 </div>
             </div>
-            <div class="col-md-4 col-12" id="repList">Drop down menu with the Congresspeople for that state and a search bar</div>
+            <div class="mx-auto" id="repList">
+                <div class="mx-auto mt-5 mb-5">
+                    <h2 class="text-center lobsterOrder">Next, choose a representative:</h2>
+                    <div class="btn-group dropright text-center">
+                        <button class="btn btn-primary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Representative List
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">This will be populated with names</a>
+                            <a class="dropdown-item" href="#">Create in js, remove from HTML when ready</a>
+                        </div>
+                      </div>
+                </div>
+            </div>
         </div>        
         <div class="row">
-            <div class="container">
-                <div class="row">
-                    <div class="tile col-6 col-md-4 col-lg-3" id="tileOne">1-append a button and an img tag (img inside of a button) onto each tile</div>
-                    <div class="tile col-6 col-md-4 col-lg-3" id="tileTwo">2</div>
-                    <div class="tile col-6 col-md-4 col-lg-3" id="tileThree">3</div>
-                    <div class="tile col-6 col-md-4 col-lg-3" id="tileFour">4</div>
-                    <div class="tile col-6 col-md-4 col-lg-3" id="tileFive">5</div>
-                    <div class="tile col-6 col-md-4 col-lg-3" id="tileSix">6</div>
+            <div class="container mx-auto">
+                <div class="col-9 mx-auto lobsterOrder mt-4">
+                    <h2 class="text-center">Now, choose an item:</h2>
+                </div>
+                <div class="row mx-auto">
+                    <div class="tile col-12 col-md-4 p-2 mx-auto border border-primary" id="tileOne">1-append a button and an img tag <button><img></button> onto each tile</div>
+                    <div class="tile col-12 col-md-4 p-2 mx-auto border border-primary" id="tileTwo">2 resize to ensure all pictures are even</div>
+                    <div class="tile col-12 col-md-4 p-2 mx-auto border border-primary" id="tileThree">3 no text, only images, add alt tags in all</div>
                     <!-- this container will hold where the flexed picture cards featuring Walmart items will appear -->
                     <!-- tiles should contain a picture that when clicked, calculates the the number you could buy and puts that -->
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="container-fluid">
+            <div class="container mx-auto">
+                <div class="mx-auto lobsterOrder mt-4">
+                    <h2 class="text-center">How many lunchables?</h2>
+                </div>
                 <div class="row">
-                    <div class="col-md-8 col-12" id="chosenImage">Scaling image of Walmart item, same as one from tile</div>
-                    <div class="col-md-4 col-12" id="resultList">(rep. x from location y), could buy (salary/object price from wallyworld)</div>
+                    <div class="col-md-4 col-12 border border-primary" id="chosenImage">Image of item that's being compared</div>
+                    <div class="col-md-8 col-12 border border-primary" id="resultList">
+                        <p>(rep. x from location y), could buy (net worth/item price) using their net worth</p>
+                        <p>The average constituent in (state) could buy (average net worth from state/item price)</p>
+                        <!-- these p tags should live in the js, not the html, and should be created after the item is chosen -->
+                    </div>
                 </div>
             </div>
         </div>
