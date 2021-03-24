@@ -12,7 +12,28 @@ body {
     text-shadow: -4px 0 red, 0 4px red, 4px 0 red, 0 -4px red;
   }
 
+  .lobsterTitle {
+    font-family: 'Lobster', cursive;
+    color: red;
+    font-size: 22px;
+  }
+
+  .lobsterOrder {
+    font-family: 'Lobster', cursive;
+    color: red;
+    font-size: 30px;
+  }
+
   .gradhead {
     background: #ff9a00;
-    background: linear-gradient(90deg, #ff9a00 0%, #ffc900 30%, #ffef00 100%);
+    background: linear-gradient(90deg, #ff8800 0%, #ffbb00 30%, #ffd900 100%);
+  }
+
+  #map{
+      max-width: 100%;
+  }
+
+  .repDrop {
+    font-family: 'Cormorant', serif;
+    line-height: 1;
   }
