@@ -1,4 +1,4 @@
-var networth = [
+var stateNetWorthVar = [
     {
         state: "United States",
         stateAb: "US",
