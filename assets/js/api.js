@@ -1,4 +1,5 @@
-
+var memberNameArray = [];
+var memberProfileArray = [];
 
 
 apiCall();
@@ -6,53 +7,92 @@ apiCall();
 // API Call for Legislators 
 function apiCall(stateCodeInput){
 
+    // need user input for two letter state code for first API call
+    var stateCodeUserInput = 'MN'
+    
     
 
     $.when(
-        
+        // first api call to retreive state legislators list
         $.ajax({
-            url: `http://www.opensecrets.org/api/?method=getLegislators&id=MN&output=json&apikey=20c6695ce98f31dce7ed360de7c4376d`,
+            url: `http://www.opensecrets.org/api/?method=getLegislators&id=${stateCodeUserInput}&output=json&apikey=20c6695ce98f31dce7ed360de7c4376d`,
             method: 'GET',
         })
         
         
-    ).then(function (unParsedlegRespObj){
-        
-        var legRespObj = JSON.parse(unParsedlegRespObj);
+    ).then(function (unParsedCongressResponseObj){
+        // store parsed JSON of state legislators object
+        var congressResponseObj = JSON.parse(unParsedCongressResponseObj);
 
-        //console.log(legRespObj.response.legislator[0]["@attributes"].firstlast);
-        
+        // generate state legisators list 
+        legislatorList(congressResponseObj);
+
+        // call function to populate list on screen and wait for selection
+
+
+        var cidUserInput = 'N00027500'  // populate cid based on user selection of legislator from previous function
+
+        // send second API call using user selected legislators CID number to gather financial networth data
         $.ajax({
-            url: `http://www.opensecrets.org/api/?method=memPFDprofile&year=2016&cid=N00027500&output=xml&apikey=20c6695ce98f31dce7ed360de7c4376d`,
+            url: `http://www.opensecrets.org/api/?method=memPFDprofile&year=2016&cid=${cidUserInput}&output=xml&apikey=20c6695ce98f31dce7ed360de7c4376d`,
             method: 'GET',
         }).then(function(xml){
-            
-            var financeObj = xmlToJson(xml);
+            // function to convert xml response data to jquery object
+            var financeResponseObj = xmlToJson(xml);
 
-            compileData(legRespObj, financeObj);
+            // send both response objects to function to compile data into a useable format
+            compileData(congressResponseObj, financeResponseObj);
             
-            //console.log(financeObj)
+            //console.log(financeResponseObj)
         })
 
        
     })    
 }
 
-function compileData(legRespObj, financeObj){
+// splits out the user selected state legislators into a list with name, cid, phone number
+function legislatorList(congressResponseObj){
+    // for loop that runs the length of the array of legislators in the response object
+    for ( i = 0; i < congressResponseObj.response.legislator.length; i++ ){
 
-    
+        var legListName =   {
+        
+                                name: congressResponseObj.response.legislator[i]["@attributes"].firstlast,
+                                cid: congressResponseObj.response.legislator[i]["@attributes"].cid,
+                                phone: congressResponseObj.response.legislator[i]["@attributes"].phone
 
-    console.log(financeObj);
+                            }   
+        // push object into memberNameArray
+        memberNameArray.push(legListName);
 
-
-    legislatorObj = {
-
-       name: legRespObj.response.legislator[0]["@attributes"].firstlast
-
+        console.log(memberNameArray);
 
     }
 
-    console.log(legislatorObj);
+}
+
+
+
+// compiles response data from finance response object into name, cid, nethigh net low - congress response obj also passed into, incase we want other data 
+function compileData(congressResponseObj, financeResponseObj){
+
+    //console.log(financeResponseObj, congressResponseObj);
+
+
+    memberProfileObj =  {
+
+                            name: financeResponseObj.response.member_profile["@attributes"].name,
+                            cid: financeResponseObj.response.member_profile["@attributes"].member_id,
+                            netHigh: financeResponseObj.response.member_profile["@attributes"].net_high,
+                            netLow: financeResponseObj.response.member_profile["@attributes"].net_low
+        
+
+                        }
+
+    
+    memberProfileArray.push(memberProfileObj)
+
+    console.log(memberProfileArray);
 
 
 
