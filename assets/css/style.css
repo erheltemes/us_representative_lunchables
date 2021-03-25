@@ -37,3 +37,13 @@ body {
     font-family: 'Cormorant', serif;
     line-height: 1;
   }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  #picLunch{
+    max-width: 80%;
+    height: auto;
+  }
