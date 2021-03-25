@@ -1,6 +1,6 @@
 var chosenStateName
 var chosenStateInitials
-var stateNetWorth
+var chosenStateNetWorth
 
 var localSave = JSON.parse(localStorage.getItem("localSave"))
 if (localSave === null) {
@@ -15,28 +15,36 @@ $("#map").on("click", function() {
             chosenStateInitials = (Object.keys(simplemaps_usmap_mapdata.state_specific)[index])
             stateNetWorthVar.forEach( function(object, index) {
                 if (object.stateAb.includes(chosenStateInitials)) {
-                    stateNetWorth = object.netWorth
-                    console.log(stateNetWorth)
+                    chosenStateNetWorth = object.netWorth
                 }
             })
-            //call Adam's first Function
-            NEWFUNTION(choosenStateInitials)
+            apiStateCall(chosenStateInitials)
         }
     })
 })
 
 $(".dropdown-menu").on("click", ".dropdown-option", function() {
-    //reaplace function with Adam's 2nd call function
-    NEWFUNCTION($(this).attr("value", val))
+    apiCidCall($(this).attr("value"), $(this).text())
 })
 
 //push object to localSave and calls propagateResult
-function pushToStroage(objectPush) {
-    localSave.push(objectPush)
+function pushToStorage(objectPush) {
+    localSave.unshift(objectPush)
     if (localSave.length > 5) {
         localSave.pop()
     }
     localStorage.setItem("localSave", JSON.stringify(localSave))
     localSave = JSON.parse(localStorage.getItem("localSave"))
-    propagateResultList()
+    console.log(localSave)
+    propagateRecentSearch()   
+}
+
+function checkSave(objectPush) {
+    if (localSave.forEach(function(object) {
+            if (object.name === objectPush.name) {
+                return true
+            }
+        }) 
+    )
+    pushToStorage(objectPush)
 }

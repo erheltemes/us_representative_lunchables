@@ -291,5 +291,7 @@ $('#buttonHome').on("click", ".btn", function() {
     else { itemPrice = eval($(this).attr("id")) 
 
     }
+
+    propagateResultList (localSave[0].stateName, localSave[0].name, localSave[0].netHigh, localSave[0].stateNetWorth, itemPrice)
 })
 
