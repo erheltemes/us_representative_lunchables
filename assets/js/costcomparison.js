@@ -1,7 +1,7 @@
-var lunchCost = 2
-var teslaCost = 90000
+var itemLunchable = 2
+var itemTesla = 90000
 
-var houseCost = [
+var itemHouse = [
     {
         state: "United States",
         stateAb: "US",
@@ -268,13 +268,28 @@ var lunchButton = $('#tileone')
 var teslaButton = $('#tiletwo')
 var houseButton = $('#tilethree')
 
-var chosenItem = $('#chosenImage')
+var chosenItemBox = $('#chosenImage')
+var itemPrice 
 
 //on click pass income variable through and divide by whichever cost, can we do housecost? 
 //populate the chosen item div
 
-lunchButton.on("click", function() {
-    console.log("hello")
-    var itemPicture = $('<img alt="Turkey and Cheddar Lunchables" src="assets/pictures/lunchablepic.jpg">')
-    chosenItem.append(itemPicture)
+$('#buttonHome').on("click", ".btn", function() {
+    chosenItemBox.empty()
+    chosenItemBox.append($("<img>").attr("src", $(this).children("img").attr("src"))
+    )
+
+    if ($(this).attr("id") === "itemHouse") {
+        itemHouse.forEach( function(object, index) {
+            if (object.stateAb.includes(chosenStateInitials)) {
+                itemPrice = object.cost
+                console.log(itemPrice)
+            }
+        })
+    }
+
+    else { itemPrice = eval($(this).attr("id")) 
+
+    }
 })
+
