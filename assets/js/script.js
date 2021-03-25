@@ -7,7 +7,7 @@ if (localSave === null) {
     localSave = []
 }
 
-//sets choosenStateInitials
+//sets choosenStateInitials etc
 $("#map").on("click", function() {
     chosenStateName = $(".tt_name_sm").text()
     Object.values(simplemaps_usmap_mapdata.state_specific).forEach(function(object, index) {
