@@ -269,16 +269,12 @@ var teslaButton = $('#tiletwo')
 var houseButton = $('#tilethree')
 
 var chosenItemBox = $('#chosenImage')
-<<<<<<< HEAD
-=======
 var itemPrice 
->>>>>>> 7a0d126f658140ce777bfee674822c10778da23f
 
 //on click pass income variable through and divide by whichever cost, can we do housecost? 
 //populate the chosen item div
 
 $('#buttonHome').on("click", ".btn", function() {
-<<<<<<< HEAD
     console.log($('this'))
     chosenItemBox.empty()
 
@@ -296,7 +292,6 @@ $('#buttonHome').on("click", ".btn", function() {
     //create <p> tag: "The average constituent in" state "can afford" number "lunchables"
 
 })
-=======
     chosenItemBox.empty()
     chosenItemBox.append($("<img>").attr("src", $(this).children("img").attr("src"))
     )
@@ -314,5 +309,3 @@ $('#buttonHome').on("click", ".btn", function() {
 
     }
 })
-
->>>>>>> 7a0d126f658140ce777bfee674822c10778da23f
