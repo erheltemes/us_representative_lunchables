@@ -10,7 +10,7 @@ var simplemaps_usmap_mapdata={
 		state_description: "State description",
     state_color: "#88A4BC",
     state_hover_color: "#3B729F",
-    state_url: "https://simplemaps.com",
+    state_url: "",
     border_size: 1.5,
     border_color: "#ffffff",
     all_states_inactive: "no",
@@ -69,7 +69,7 @@ var simplemaps_usmap_mapdata={
     images_directory: "default",
     import_labels: "no",
     fade_time: 0.1,
-    link_text: "View Website"
+    link_text: ""
   },
   state_specific: {
     HI: {
@@ -431,46 +431,6 @@ var simplemaps_usmap_mapdata={
       hover_color: "default",
       url: "default"
     },
-    GU: {
-      name: "Guam",
-      description: "default",
-      color: "default",
-      hover_color: "default",
-      url: "default",
-      hide: "yes"
-    },
-    VI: {
-      name: "Virgin Islands",
-      description: "default",
-      color: "default",
-      hover_color: "default",
-      url: "default",
-      hide: "yes"
-    },
-    PR: {
-      name: "Puerto Rico",
-      description: "default",
-      color: "default",
-      hover_color: "default",
-      url: "default",
-      hide: "yes"
-    },
-    AS: {
-      name: "American Samoa",
-      description: "default",
-      color: "default",
-      hover_color: "default",
-      url: "default",
-      hide: "yes"
-    },
-    MP: {
-      name: "Northern Mariana Islands",
-      description: "default",
-      color: "default",
-      hover_color: "default",
-      url: "default",
-      hide: "yes"
-    }
   },
   labels: {
     NH: {
@@ -756,30 +716,5 @@ var simplemaps_usmap_mapdata={
       x: "663",
       y: "185"
     },
-    PR: {
-      parent_id: "PR",
-      x: "620",
-      y: "545"
-    },
-    GU: {
-      parent_id: "GU",
-      x: "550",
-      y: "540"
-    },
-    VI: {
-      parent_id: "VI",
-      x: "680",
-      y: "519"
-    },
-    MP: {
-      parent_id: "MP",
-      x: "570",
-      y: "575"
-    },
-    AS: {
-      parent_id: "AS",
-      x: "665",
-      y: "580"
-    }
   }
 };

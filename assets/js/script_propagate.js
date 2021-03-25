@@ -25,3 +25,4 @@ function propagateResultList (location, rep, repWorth, avConstWorth, itemPrice) 
 }
 
 
+
