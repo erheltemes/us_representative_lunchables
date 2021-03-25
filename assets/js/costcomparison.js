@@ -268,13 +268,26 @@ var lunchButton = $('#tileone')
 var teslaButton = $('#tiletwo')
 var houseButton = $('#tilethree')
 
-var chosenItem = $('#chosenImage')
+var chosenItemBox = $('#chosenImage')
 
 //on click pass income variable through and divide by whichever cost, can we do housecost? 
 //populate the chosen item div
 
-lunchButton.on("click", function() {
-    console.log("hello")
+$('#buttonHome').on("click", ".btn", function() {
+    console.log($('this'))
+    chosenItemBox.empty()
+
+    //populate chosen item div with picture
+
     var itemPicture = $('<img alt="Turkey and Cheddar Lunchables" src="assets/pictures/lunchablepic.jpg">')
-    chosenItem.append(itemPicture)
+    chosenItemBox.append(itemPicture)
+
+    //take variable for congressperson's salaray and divide by variable "lunchCost"
+
+    //create <p> tag for that variable with name "can afford" number "lunchables"
+
+    //take variable for median salary in globally declared state and divide by variable "lunchCost"
+
+    //create <p> tag: "The average constituent in" state "can afford" number "lunchables"
+
 })
