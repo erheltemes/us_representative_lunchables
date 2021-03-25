@@ -2,20 +2,17 @@ var memberNameArray = [];
 var memberProfileArray = [];
 
 
-apiCall();
 
 // API Call for Legislators 
-function apiCall(stateCodeInput){
+function apiStateCall(stateCodeInput){
+
 
     // need user input for two letter state code for first API call
-    var stateCodeUserInput = 'MN'
-    
-    
 
     $.when(
         // first api call to retreive state legislators list
         $.ajax({
-            url: `http://www.opensecrets.org/api/?method=getLegislators&id=${stateCodeUserInput}&output=json&apikey=20c6695ce98f31dce7ed360de7c4376d`,
+            url: `http://www.opensecrets.org/api/?method=getLegislators&id=${stateCodeInput}&output=json&apikey=20c6695ce98f31dce7ed360de7c4376d`,
             method: 'GET',
         })
         
@@ -27,28 +24,32 @@ function apiCall(stateCodeInput){
         // generate state legisators list 
         legislatorList(congressResponseObj);
 
-        // call function to populate list on screen and wait for selection
-
-
-        var cidUserInput = 'N00027500'  // populate cid based on user selection of legislator from previous function
-
-        // send second API call using user selected legislators CID number to gather financial networth data
-        $.ajax({
-            url: `http://www.opensecrets.org/api/?method=memPFDprofile&year=2016&cid=${cidUserInput}&output=xml&apikey=20c6695ce98f31dce7ed360de7c4376d`,
-            method: 'GET',
-        }).then(function(xml){
-            // function to convert xml response data to jquery object
-            var financeResponseObj = xmlToJson(xml);
-
-            // send both response objects to function to compile data into a useable format
-            compileData(congressResponseObj, financeResponseObj);
-            
-            //console.log(financeResponseObj)
-        })
-
+        // call function to populate list on screen and wait for selectio
        
     })    
 }
+
+
+function apiCidCall(cidUserInput){
+
+    // TEST CID NUMBER N00027500  // populate cid based on user selection of legislator from previous function
+
+    // send second API call using user selected legislators CID number to gather financial networth data
+    $.ajax({
+        url: `http://www.opensecrets.org/api/?method=memPFDprofile&year=2016&cid=${cidUserInput}&output=xml&apikey=20c6695ce98f31dce7ed360de7c4376d`,
+        method: 'GET',
+    }).then(function(xml){
+        // function to convert xml response data to jquery object
+        var financeResponseObj = xmlToJson(xml);
+
+        // send both response objects to function to compile data into a useable format
+        compileData(congressResponseObj, financeResponseObj);
+        
+        //console.log(financeResponseObj)
+    })
+
+}
+
 
 // splits out the user selected state legislators into a list with name, cid, phone number
 function legislatorList(congressResponseObj){
@@ -65,10 +66,7 @@ function legislatorList(congressResponseObj){
         // push object into memberNameArray
         memberNameArray.push(legListName);
 
-        console.log(memberNameArray);
-
     }
-
 }
 
 
@@ -86,17 +84,13 @@ function compileData(congressResponseObj, financeResponseObj){
                             netHigh: financeResponseObj.response.member_profile["@attributes"].net_high,
                             netLow: financeResponseObj.response.member_profile["@attributes"].net_low
         
-
                         }
-
     
     memberProfileArray.push(memberProfileObj)
 
-    console.log(memberProfileArray);
-
-
-
 }
+
+
 /**
  * Changes XML to JSON
  * Modified version from here: http://davidwalsh.name/convert-xml-json
@@ -147,7 +141,6 @@ function compileData(congressResponseObj, financeResponseObj){
       }
     }
 
-    //console.log(obj);
     return obj;
   };
   
