@@ -1,3 +1,4 @@
+  
 var itemLunchable = 2
 var itemTesla = 90000
 
@@ -275,23 +276,6 @@ var itemPrice
 //populate the chosen item div
 
 $('#buttonHome').on("click", ".btn", function() {
-    console.log($('this'))
-    chosenItemBox.empty()
-
-    //populate chosen item div with picture
-
-    var itemPicture = $('<img alt="Turkey and Cheddar Lunchables" src="assets/pictures/lunchablepic.jpg">')
-    chosenItemBox.append(itemPicture)
-
-    //take variable for congressperson's salaray and divide by variable "lunchCost"
-
-    //create <p> tag for that variable with name "can afford" number "lunchables"
-
-    //take variable for median salary in globally declared state and divide by variable "lunchCost"
-
-    //create <p> tag: "The average constituent in" state "can afford" number "lunchables"
-
-})
     chosenItemBox.empty()
     chosenItemBox.append($("<img>").attr("src", $(this).children("img").attr("src"))
     )
@@ -308,4 +292,6 @@ $('#buttonHome').on("click", ".btn", function() {
     else { itemPrice = eval($(this).attr("id")) 
 
     }
+
+    propagateResultList (localSave[0].stateName, localSave[0].name, localSave[0].netHigh, localSave[0].stateNetWorth, itemPrice)
 })
