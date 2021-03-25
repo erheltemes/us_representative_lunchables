@@ -2,14 +2,12 @@ var memberNameArray = [];
 var memberProfileArray = [];
 
 
-
 // API Call for Legislators 
 function apiStateCall(stateCodeInput){
-
+  memberNameArray = []
 
     // need user input for two letter state code for first API call
 
-    $.when(
         // first api call to retreive state legislators list
         $.ajax({
             url: `http://www.opensecrets.org/api/?method=getLegislators&id=${stateCodeInput}&output=json&apikey=20c6695ce98f31dce7ed360de7c4376d`,
@@ -17,20 +15,20 @@ function apiStateCall(stateCodeInput){
         })
         
         
-    ).then(function (unParsedCongressResponseObj){
+    .then(function (unParsedCongressResponseObj){
         // store parsed JSON of state legislators object
         var congressResponseObj = JSON.parse(unParsedCongressResponseObj);
 
         // generate state legisators list 
         legislatorList(congressResponseObj);
 
-        // call function to populate list on screen and wait for selectio
-       
+        // call function to populate list on screen and wait for selection
+        propagateRepList(memberNameArray)
     })    
 }
 
 
-function apiCidCall(cidUserInput){
+function apiCidCall(cidUserInput, nameUserInput){
 
     // TEST CID NUMBER N00027500  // populate cid based on user selection of legislator from previous function
 
@@ -41,9 +39,9 @@ function apiCidCall(cidUserInput){
     }).then(function(xml){
         // function to convert xml response data to jquery object
         var financeResponseObj = xmlToJson(xml);
-
+        console.log(financeResponseObj)
         // send both response objects to function to compile data into a useable format
-        compileData(congressResponseObj, financeResponseObj);
+        compileData(financeResponseObj, nameUserInput);
         
         //console.log(financeResponseObj)
     })
@@ -72,21 +70,30 @@ function legislatorList(congressResponseObj){
 
 
 // compiles response data from finance response object into name, cid, nethigh net low - congress response obj also passed into, incase we want other data 
-function compileData(congressResponseObj, financeResponseObj){
+function compileData(financeResponseObj, nameUserInput){
 
     //console.log(financeResponseObj, congressResponseObj);
-
+    if (financeResponseObj.response.member_profile["@attributes"].net_high == "0" || financeResponseObj.response.member_profile["@attributes"].net_high == "" ) {
+      $("#repStatus").empty()
+      $("#repStatus").append($("<p>").text(`${nameUserInput} is not available for comparison.`))
+      console.log()
+      return
+    }
 
     memberProfileObj =  {
 
-                            name: financeResponseObj.response.member_profile["@attributes"].name,
+                            name: nameUserInput,
                             cid: financeResponseObj.response.member_profile["@attributes"].member_id,
                             netHigh: financeResponseObj.response.member_profile["@attributes"].net_high,
-                            netLow: financeResponseObj.response.member_profile["@attributes"].net_low
-        
+                            netLow: financeResponseObj.response.member_profile["@attributes"].net_low,
+                            stateName: chosenStateName, 
+                            stateNetWorth: chosenStateNetWorth,
                         }
     
     memberProfileArray.push(memberProfileObj)
+    $("#repStatus").empty()
+    $("#repStatus").append($("<p>").text(`${nameUserInput} is available for comparison.`))
+    pushToStorage(memberProfileObj)
 
 }
 
