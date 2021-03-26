@@ -1,6 +1,7 @@
 function propagateRepList(array) {
     $(".dropdown-menu").empty()
     array.forEach(function(val) {
+        $(".dropdown-toggle").text(chosenStateInitials + " Representatives:")
         $(".dropdown-menu").append($("<a>").addClass("dropdown-option").attr("value", val.cid).attr("href", "#repStatus").attr("style", "display:block;").text(val.name))
     })
 }
