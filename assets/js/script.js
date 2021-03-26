@@ -34,6 +34,8 @@ $(".dropdown-menu").on("click", ".dropdown-option", function() {
 })
 
 $("#recentSearches").on("click", ".recent-search-card", function(){
+    $("#resultList").empty()
+    $("#chosenImage").empty()
     chosenStateName = localSave[$(this).attr("value")].stateName
     chosenStateIntials = localSave[$(this).attr("value")].stateIntitals
     chosenStateNetWorth = localSave[$(this).attr("value")].stateNetWorth
