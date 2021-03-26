@@ -18,7 +18,7 @@ function propagateRecentSearch () {
     else {
         localSave.forEach(function(val, index) {
             $("#recentSearches")
-            .append($("<div>").addClass("recent-search-card").attr("value", index)
+            .append($("<div>").addClass("recent-search-card col-2 p-2 btn").attr("value", index)
                 .append($("<img>").attr("src", val.image)
                 )
                 .append($("<h3>").text(val.name)
@@ -31,17 +31,19 @@ function propagateRecentSearch () {
 function propagateResultList () {
     $("#resultList").empty()
     $("#resultList")
+<<<<<<< HEAD
 
 
     .append($("<p>").text(`${repName} from ${chosenStateName}, could buy ${(Math.trunc(repWorth/itemPrice*100)/100)} using thier net worth.`)
     )
     .append($("<p>").text(`The average constituent in ${chosenStateName} could buy ${Math.trunc(chosenStateNetWorth/itemPrice*100)/100}`)
 
+=======
+    .append($("<p>").text(`${repName} from ${chosenStateName}, could buy ${(Math.trunc(repWorth/itemPrice*100)/100).toLocaleString()} using thier net worth.`)
     )
-}
-
-function propagateDropDownHead() {
-    $(".dropdown-toggle").text(`${chosenStateInitials} Rep List`)
+    .append($("<p>").text(`The average constituent in ${chosenStateName} could buy ${(Math.trunc(chosenStateNetWorth/itemPrice*100)/100).toLocaleString()}`)
+>>>>>>> efb05238d26f1d047e94b5af18538cc50be0910e
+    )
 }
 
 
