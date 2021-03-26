@@ -1,5 +1,6 @@
 function propagateRepList(array) {
     $(".dropdown-menu").empty()
+    $("#repList").removeClass("hiddenItem").addClass("shownItem")
     array.forEach(function(val) {
         $(".dropdown-toggle").text(chosenStateInitials + " Representatives:")
         $(".dropdown-menu").append($("<a>").addClass("dropdown-option").attr("value", val.cid).attr("href", "#repStatus").attr("style", "display:block;").text(val.name))
@@ -30,6 +31,7 @@ function propagateRecentSearch () {
 
 function propagateResultList () {
     $("#resultList").empty()
+    $("#resultContainer").removeClass("hiddenItem").addClass("shownItem")
     $("#resultList")
     .append($("<p>").text(`${repName} from ${chosenStateName}, could buy ${(Math.trunc(repWorth/itemPrice*100)/100).toLocaleString()} using thier net worth.`)
     )

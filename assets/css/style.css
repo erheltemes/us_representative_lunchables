@@ -65,3 +65,11 @@ body {
   .unavailable {
     color: red;
   }
+
+  .hiddenItem {
+    display: none;
+  }
+
+  .shownItem {
+    display: block;
+  }
