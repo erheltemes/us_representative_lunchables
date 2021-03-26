@@ -69,7 +69,7 @@ function compileData(financeResponseObj, nameUserInput){
     //console.log(financeResponseObj, congressResponseObj);
     if (financeResponseObj.response.member_profile["@attributes"].net_high == "0" || financeResponseObj.response.member_profile["@attributes"].net_high == "" ) {
       $("#repStatus").empty()
-      $("#repStatus").append($("<p>").text(`${nameUserInput} is not available for comparison.`))
+      $("#repStatus").append($("<p>").text(`${nameUserInput} is not available for comparison.`)).addClass("unavailable").removeClass("available")
       console.log()
 
       return 
@@ -88,7 +88,7 @@ function compileData(financeResponseObj, nameUserInput){
     
     memberProfileArray.push(memberProfileObj)
     $("#repStatus").empty()
-    $("#repStatus").append($("<p>").text(`${nameUserInput} is available for comparison.`))
+    $("#repStatus").append($("<p>").text(`${nameUserInput} is available for comparison.`)).addClass("available").removeClass("unavailable")
     pushToStorage(memberProfileObj)
 }
 
