@@ -31,9 +31,9 @@ function propagateRecentSearch () {
 function propagateResultList () {
     $("#resultList").empty()
     $("#resultList")
-    .append($("<p>").text(`${repName} from ${chosenStateName}, could buy ${(Math.trunc(repWorth/itemPrice*100)/100)} using thier net worth.`)
+    .append($("<p>").text(`${repName} from ${chosenStateName}, could buy ${(Math.trunc(repWorth/itemPrice*100)/100).toLocaleString()} using thier net worth.`)
     )
-    .append($("<p>").text(`The average constituent in ${chosenStateName} could buy ${Math.trunc(chosenStateNetWorth/itemPrice*100)/100}`)
+    .append($("<p>").text(`The average constituent in ${chosenStateName} could buy ${(Math.trunc(chosenStateNetWorth/itemPrice*100)/100).toLocaleString()}`)
     )
 }
 
