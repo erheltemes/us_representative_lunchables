@@ -87,6 +87,7 @@ function compileData(financeResponseObj, nameUserInput){
     $("#repStatus").empty()
     $("#repStatus").append($("<p>").text(`${nameUserInput} is available for comparison.`)).addClass("available").removeClass("unavailable")
     pushToStorage(memberProfileObj)
+    $("#itemChoice").removeClass("hiddenItem").addClass("shownItem")
 }
 
 function imageGrab(financeResponseObj, searchName) {
@@ -99,21 +100,21 @@ function imageGrab(financeResponseObj, searchName) {
     console.log(Object.values(data.query.pages)[0].images)
     if (Object.values(data.query.pages)[0].images != undefined) {    
       for (i=0; i < Object.values(data.query.pages)[0].images.length; i++) {
-      if (Object.values(data.query.pages)[0].images[i].title.endsWith("jpg")) {
-        $.ajax({
-          url: `https://en.wikipedia.org/w/api.php?action=query&titles=${Object.values(data.query.pages)[0].images[i].title.replace(" ", "_")}&format=json&prop=imageinfo&format=json&origin=*&iiprop=url`,
-          method: 'GET',
-        })
-        .then(function(data) {
-          repImg = Object.values(Object.values(data.query.pages)[0].imageinfo)[0].url
-          compileData(financeResponseObj, searchName);
-        return 
-      })
-      }
-    } 
-  }
-  else {compileData(financeResponseObj, searchName)}  
-})
+        if (Object.values(data.query.pages)[0].images[i].title.endsWith("jpg")) {
+          $.ajax({
+            url: `https://en.wikipedia.org/w/api.php?action=query&titles=${Object.values(data.query.pages)[0].images[i].title.replace(" ", "_")}&format=json&prop=imageinfo&format=json&origin=*&iiprop=url`,
+            method: 'GET',
+          })
+          .then(function(data) {
+            repImg = Object.values(Object.values(data.query.pages)[0].imageinfo)[0].url
+            compileData(financeResponseObj, searchName);
+          return 
+          })
+        }
+      } 
+    }
+    else {compileData(financeResponseObj, searchName)}  
+  })
 }
 
 
