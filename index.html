@@ -15,17 +15,17 @@
         <div class="jumbotron jumbotron-fluid gradhead">
             <div class="container ">
                 <h1 class="display-4 text-center lobster">How Many Lunchables?</h1>
-                <p class="lobsterTitle w-50 p-3 mx-auto text-center mt-1">An interactive experience to illustrate wealth distribution comparisons between elected officials and their constituents.</p>
+                <section class="lobsterTitle w-50 p-3 mx-auto text-center mt-1">An interactive experience to illustrate wealth distribution comparisons between elected officials and their constituents.</section>
             </div>
         </div>
     </div> 
 
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
-            <div class="col-9 mx-auto lobsterOrder mt-4">
+            <div class="col-12 mx-auto lobsterOrder mt-4">
                 <h2 class="text-center">First, choose your state:</h2>
             </div>
-            <div class="col-9 mx-auto mb-3" id="map">
+            <div class="col-12 mx-auto mb-3" id="map">
                 <div class="row">
 
                 </div>
@@ -34,25 +34,23 @@
                 <div class="mx-auto mt-5 mb-5">
                     <h2 class="text-center lobsterOrder">Next, choose a representative:</h2>
                     <div class="btn-group dropright text-center">
-                        <button class="btn btn-primary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Representative List
+                        <button class="btn btn-primary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">                        
                         </button>
                         <div class="dropdown-menu">
                         </div>
                         <div id="repStatus">
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>        
         <div class="row">
-            <div class="container mx-auto">
-                <div class="col-9 mx-auto lobsterOrder mt-4">
+            <div class="col-12 container mx-auto">
+                <div class="mx-auto lobsterOrder mt-4">
                     <h2 class="text-center">Now, choose an item:</h2>
                 </div>
-                <div id="buttonHome" class="row mx-auto">
-                    <div class="tile col-12 col-md-4 p-2 mx-auto" id="tileOne">
+                <div class="row mx-auto" id="buttonHome">
+                    <div class="tile col-12 col-md-4 mx-auto p-2" id="tileOne">
                         <button class="btn itemLunchable" id="itemLunchable"><img alt="Turkey and Cheddar Lunchables" id="picLunch" src="assets/pictures/lunchablepic.jpg"></button>
                     </div>
                     <div class="tile col-12 col-md-4 p-2 mx-auto" id="tileTwo">
@@ -65,25 +63,24 @@
             </div>
         </div>
         <div class="row">
-            <div class="container mx-auto">
+            <div class="container col-12 mx-auto">
                 <div class="mx-auto lobsterOrder mt-4">
                     <h2 class="text-center">How many lunchables?</h2>
                 </div>
                 <div class="row">
-                    <div class="col-md-4 col-12 border border-primary" id="chosenImage">Image of item that's being compared</div>
-                    <div class="col-md-8 col-12 border border-primary" id="resultList">
-                        <!-- these p tags should live in the js, not the html, and should be created after the item is chosen -->
+                    <div class="col-md-4 col-12" id="chosenImage"></div>
+                    <div class="col-md-8 col-12 pt-3 pl-5" id="resultList">
                     </div>
                 </div>
             </div>
         </div>
         <div class ="row">
-            <div class="container mx-auto">
+            <div class="container col-12 mx-auto">
                 <div class="mx-auto lobsterOrder mt-4">
                     <h2 class="text-center">Recent searches:</h2>
                 </div>
             </div>
-            <div class="container mx-auto border border-primary" id="recentSearches">
+            <div class="container mx-auto" id="recentSearches">
 
             </div>
         </div>
