@@ -23,7 +23,6 @@ function apiStateCall(stateCodeInput){
 
         // call function to populate list on screen and wait for selection
         propagateRepList(memberNameArray)
-        propagateDropDownHead()
     })    
 }
 
@@ -41,8 +40,6 @@ function apiCidCall(cidUserInput, nameUserInput){
         // send both response objects to function to compile data into a useable format
         imageGrab(financeResponseObj, nameUserInput)    
     })
-    
-
 }
 
 // splits out the user selected state legislators into a list with name, cid, phone number
@@ -95,24 +92,27 @@ function compileData(financeResponseObj, nameUserInput){
 function imageGrab(financeResponseObj, searchName) {
   repImg = null
   $.ajax({
-    url: `https://en.wikipedia.org/w/api.php?action=query&titles=${searchName.replace(" ", "%20")}&format=json&origin=*&prop=images`,
+    url: `https://en.wikipedia.org/w/api.php?action=query&titles=${searchName.replace(" ", "%20")}%20politician&format=json&origin=*&prop=images`,
     method: 'GET',
   })
   .then(function(data) {
-    for (i=0; i < Object.values(data.query.pages)[0].images.length; i++) {
-      if (Object.values(data.query.pages)[0].images[i].title.endsWith("jpg")) {
-        $.ajax({
-          url: `https://en.wikipedia.org/w/api.php?action=query&titles=${Object.values(data.query.pages)[0].images[i].title.replace(" ", "_")}&format=json&prop=imageinfo&format=json&origin=*&iiprop=url`,
-          method: 'GET',
-        })
-        .then(function(data) {
-          repImg = Object.values(Object.values(data.query.pages)[0].imageinfo)[0].url
-          compileData(financeResponseObj, searchName);
-        })
-        return
-      }
-    } 
-    compileData(financeResponseObj, searchName)
+    console.log(Object.values(data.query.pages)[0].images)
+    if (Object.values(data.query.pages)[0].images != undefined) {
+      for (i=0; i < Object.values(data.query.pages)[0].images.length; i++) {
+        if (Object.values(data.query.pages)[0].images[i].title.endsWith("jpg")) {
+          $.ajax({
+            url: `https://en.wikipedia.org/w/api.php?action=query&titles=${Object.values(data.query.pages)[0].images[i].title.replace(" ", "_")}&format=json&prop=imageinfo&format=json&origin=*&iiprop=url`,
+            method: 'GET',
+          })
+          .then(function(data) {
+            repImg = Object.values(Object.values(data.query.pages)[0].imageinfo)[0].url
+            compileData(financeResponseObj, searchName);
+            return
+          })
+        }
+      } 
+    }
+    else {compileData(financeResponseObj, searchName)}
   })
 }
 

@@ -34,11 +34,11 @@ $(".dropdown-menu").on("click", ".dropdown-option", function() {
 })
 
 $("#recentSearches").on("click", ".recent-search-card", function(){
-    chosenStateName = localSave[$(".recent-search-card").attr("value")].stateName
-    chosenStateIntials = localSave[$(".recent-search-card").attr("value")].stateIntitals
-    chosenStateNetWorth = localSave[$(".recent-search-card").attr("value")].stateNetWorth
-    repName = localSave[$(".recent-search-card").attr("value")].name
-    repWorth = localSave[$(".recent-search-card").attr("value")].netHigh
+    chosenStateName = localSave[$(this).attr("value")].stateName
+    chosenStateIntials = localSave[$(this).attr("value")].stateIntitals
+    chosenStateNetWorth = localSave[$(this).attr("value")].stateNetWorth
+    repName = localSave[$(this).attr("value")].name
+    repWorth = localSave[$(this).attr("value")].netHigh
 
     console.log($(".recent-search-card").attr("value"))
     $("#repStatus").empty()

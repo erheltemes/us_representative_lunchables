@@ -18,7 +18,7 @@ function propagateRecentSearch () {
     else {
         localSave.forEach(function(val, index) {
             $("#recentSearches")
-            .append($("<div>").addClass("recent-search-card").attr("value", index)
+            .append($("<div>").addClass("recent-search-card col-2 p-2 btn").attr("value", index)
                 .append($("<img>").attr("src", val.image)
                 )
                 .append($("<h3>").text(val.name)
@@ -35,10 +35,6 @@ function propagateResultList () {
     )
     .append($("<p>").text(`The average constituent in ${chosenStateName} could buy ${Math.trunc(chosenStateNetWorth/itemPrice*100)/100}`)
     )
-}
-
-function propagateDropDownHead() {
-    $(".dropdown-toggle").text(`${chosenStateInitials} Rep List`)
 }
 
 
