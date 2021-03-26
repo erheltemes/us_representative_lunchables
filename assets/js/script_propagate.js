@@ -18,7 +18,7 @@ function propagateRecentSearch () {
     else {
         localSave.forEach(function(val, index) {
             $("#recentSearches")
-            .append($("<div>").addClass("recent-search-card col-2 p-2 btn").attr("value", index)
+            .append($("<div>").addClass("recent-search-card col px-md-1 btn").attr("value", index)
                 .append($("<img>").attr("src", val.image)
                 )
                 .append($("<h3>").text(val.name)
