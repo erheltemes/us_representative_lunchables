@@ -289,8 +289,8 @@ $('#buttonHome').on("click", ".btn", function() {
         })
     }
 
-    else { itemPrice = eval($(this).attr("id")) 
-
+    else { 
+        itemPrice = eval($(this).attr("id")) 
     }
 
     propagateResultList ()

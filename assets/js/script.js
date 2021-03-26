@@ -14,6 +14,9 @@ propagateRecentSearch()
 
 //sets choosenStateInitials etc
 $("#map").on("click", function() {
+    $("#repList").addClass("hiddenItem").removeClass("shownItem")
+    $("#resultContainer").addClass("hiddenItem").removeClass("shownItem")
+    $("#itemChoice").addClass("hiddenItem").removeClass("shownItem")
     chosenStateName = $(".tt_name_sm").text()
     Object.values(simplemaps_usmap_mapdata.state_specific).forEach(function(object, index) {
         if (object.name == $(".tt_name_sm").text()) {
@@ -36,8 +39,11 @@ $(".dropdown-menu").on("click", ".dropdown-option", function() {
 $("#recentSearches").on("click", ".recent-search-card", function(){
     $("#resultList").empty()
     $("#chosenImage").empty()
+    $("#repList").removeClass("hiddenItem").addClass("shownItem")
+    $("#itemChoice").removeClass("hiddenItem").addClass("shownItem")
+    $("#resultContainer").addClass("hiddenItem").removeClass("shownItem")
     chosenStateName = localSave[$(this).attr("value")].stateName
-    chosenStateIntials = localSave[$(this).attr("value")].stateIntitals
+    chosenStateInitials = localSave[$(this).attr("value")].stateInitials
     chosenStateNetWorth = localSave[$(this).attr("value")].stateNetWorth
     repName = localSave[$(this).attr("value")].name
     repWorth = localSave[$(this).attr("value")].netHigh
@@ -45,17 +51,14 @@ $("#recentSearches").on("click", ".recent-search-card", function(){
     console.log($(".recent-search-card").attr("value"))
     $("#repStatus").empty()
     apiStateCall(chosenStateInitials)
-    $("#repStatus").append($("<p>").text(`${repName} is available for comparison.`))
+    $("#repStatus").append($("<p>").text(`${repName} is available for comparison.`)).addClass("available").removeClass("unavailable")
 })
-
-
-
 
 //push object to localSave and calls propagateResult
 function pushToStorage(objectPush) {
     if (!checkSave(objectPush)) {
         localSave.unshift(objectPush)
-        if (localSave.length > 5) {
+        if (localSave.length > 4) {
             localSave.pop()
         }
         localStorage.setItem("localSave", JSON.stringify(localSave))
