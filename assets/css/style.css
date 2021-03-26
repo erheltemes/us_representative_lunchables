@@ -65,3 +65,11 @@ body {
   footer {
     text-align: center;
   }
+
+  .hiddenItem {
+    display: none;
+  }
+
+  .shownItem {
+    display: block;
+  }
