@@ -1,11 +1,16 @@
 var chosenStateName
 var chosenStateInitials
 var chosenStateNetWorth
+var repWorth
+var repName
+var repImg
 
 var localSave = JSON.parse(localStorage.getItem("localSave"))
 if (localSave === null) {
     localSave = []
 }
+//create recent search on load
+propagateRecentSearch()
 
 //sets choosenStateInitials etc
 $("#map").on("click", function() {
@@ -18,33 +23,57 @@ $("#map").on("click", function() {
                     chosenStateNetWorth = object.netWorth
                 }
             })
+            $("#repStatus").empty()
             apiStateCall(chosenStateInitials)
         }
     })
 })
 
 $(".dropdown-menu").on("click", ".dropdown-option", function() {
-    apiCidCall($(this).attr("value"), $(this).text())
+    apiCidCall($(this).attr("value"), $(this).text())   
 })
+
+$("#recentSearches").on("click", ".recent-search-card", function(){
+    chosenStateName = localSave[$(".recent-search-card").attr("value")].stateName
+    chosenStateIntials = localSave[$(".recent-search-card").attr("value")].stateIntitals
+    chosenStateNetWorth = localSave[$(".recent-search-card").attr("value")].stateNetWorth
+    repName = localSave[$(".recent-search-card").attr("value")].name
+    repWorth = localSave[$(".recent-search-card").attr("value")].netHigh
+
+    console.log($(".recent-search-card").attr("value"))
+    $("#repStatus").empty()
+    apiStateCall(chosenStateInitials)
+    $("#repStatus").append($("<p>").text(`${repName} is available for comparison.`))
+})
+
+
+
 
 //push object to localSave and calls propagateResult
 function pushToStorage(objectPush) {
-    localSave.unshift(objectPush)
-    if (localSave.length > 5) {
-        localSave.pop()
-    }
-    localStorage.setItem("localSave", JSON.stringify(localSave))
-    localSave = JSON.parse(localStorage.getItem("localSave"))
-    console.log(localSave)
-    propagateRecentSearch()   
+    if (!checkSave(objectPush)) {
+        localSave.unshift(objectPush)
+        if (localSave.length > 5) {
+            localSave.pop()
+        }
+        localStorage.setItem("localSave", JSON.stringify(localSave))
+        localSave = JSON.parse(localStorage.getItem("localSave"))
+        chosenStateName = localSave[0].stateName
+        chosenStateIntials = localSave[0].stateIntitals
+        chosenStateNetWorth = localSave[0].stateNetWorth
+        repName = localSave[0].name
+        repWorth = localSave[0].netHigh
+        propagateRecentSearch() 
+    }  
 }
-
+//checks if save already exsists
 function checkSave(objectPush) {
-    if (localSave.forEach(function(object) {
-            if (object.name === objectPush.name) {
-                return true
-            }
-        }) 
-    )
-    pushToStorage(objectPush)
-}
+    for (i = 0; i < localSave.length; i++) {
+        if (localSave[i].name === objectPush.name) {
+            return true
+        }
+    }
+    return false
+} 
+    
+

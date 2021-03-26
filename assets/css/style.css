@@ -47,3 +47,17 @@ body {
     max-width: 80%;
     height: auto;
   }
+
+  p {
+    font-size: 28px;
+    max-width: 75%;
+    display: inline-block;
+  }
+
+  .available {
+    color: #0275d8;
+  }
+
+  .unavailable {
+    color: #ff9a00;
+  }

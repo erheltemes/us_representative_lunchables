@@ -1,3 +1,4 @@
+  
 var itemLunchable = 2
 var itemTesla = 90000
 
@@ -292,6 +293,6 @@ $('#buttonHome').on("click", ".btn", function() {
 
     }
 
-    propagateResultList (localSave[0].stateName, localSave[0].name, localSave[0].netHigh, localSave[0].stateNetWorth, itemPrice)
+    propagateResultList ()
 })
 
