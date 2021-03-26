@@ -43,10 +43,6 @@ body {
     height: auto;
   }
 
-  .noWrap {
-    white-space: nowrap;
-  }
-
   #picLunch{
     max-width: 80%;
     height: auto;
@@ -64,6 +60,10 @@ body {
 
   .unavailable {
     color: red;
+  }
+
+  footer {
+    text-align: center;
   }
 
   .hiddenItem {
