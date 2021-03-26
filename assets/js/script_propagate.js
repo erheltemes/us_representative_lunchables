@@ -8,24 +8,37 @@ function propagateRepList(array) {
 
 function propagateRecentSearch () {
     $("#recentSearches").empty()
-    localSave.forEach(function(val) {
+    if (localSave.length === 0) {
         $("#recentSearches")
-        .append($("<div>").addClass("recent-search-card")
-            // .append($("<img>").attr("src", val.img)
-            // )
-            .append($("<h3>").text(val.name)
+        .append($("<div>").addClass("empty-search")
+            .append($("<h3>").text("No Recent Searches")
             )
         )
-    })
+    }
+    else {
+        localSave.forEach(function(val, index) {
+            $("#recentSearches")
+            .append($("<div>").addClass("recent-search-card").attr("value", index)
+                .append($("<img>").attr("src", val.image)
+                )
+                .append($("<h3>").text(val.name)
+                )
+            )
+        })
+    }
 }
 
-function propagateResultList (location, rep, repWorth, avConstWorth, itemPrice) {
+function propagateResultList () {
     $("#resultList").empty()
     $("#resultList")
-    .append($("<p>").text(`${rep} from ${location}, could buy ${Math.trunc(repWorth/itemPrice*100)/100} using thier net worth.`)
+    .append($("<p>").text(`${repName} from ${chosenStateName}, could buy ${(Math.trunc(repWorth/itemPrice*100)/100)} using thier net worth.`)
     )
-    .append($("<p>").text(`The average constituent in ${location} could buy ${Math.trunc(avConstWorth/itemPrice*100)/100} `)
+    .append($("<p>").text(`The average constituent in ${chosenStateName} could buy ${Math.trunc(chosenStateNetWorth/itemPrice*100)/100}`)
     )
+}
+
+function propagateDropDownHead() {
+    $(".dropdown-toggle").text(`${chosenStateInitials} Rep List`)
 }
 
 

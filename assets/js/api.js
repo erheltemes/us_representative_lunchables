@@ -1,7 +1,6 @@
 var memberNameArray = [];
 var memberProfileArray = [];
 
-
 // API Call for Legislators 
 function apiStateCall(stateCodeInput){
   memberNameArray = []
@@ -24,9 +23,9 @@ function apiStateCall(stateCodeInput){
 
         // call function to populate list on screen and wait for selection
         propagateRepList(memberNameArray)
+        propagateDropDownHead()
     })    
 }
-
 
 function apiCidCall(cidUserInput, nameUserInput){
 
@@ -39,15 +38,12 @@ function apiCidCall(cidUserInput, nameUserInput){
     }).then(function(xml){
         // function to convert xml response data to jquery object
         var financeResponseObj = xmlToJson(xml);
-        console.log(financeResponseObj)
         // send both response objects to function to compile data into a useable format
-        compileData(financeResponseObj, nameUserInput);
-        
-        //console.log(financeResponseObj)
+        imageGrab(financeResponseObj, nameUserInput)    
     })
+    
 
 }
-
 
 // splits out the user selected state legislators into a list with name, cid, phone number
 function legislatorList(congressResponseObj){
@@ -67,8 +63,6 @@ function legislatorList(congressResponseObj){
     }
 }
 
-
-
 // compiles response data from finance response object into name, cid, nethigh net low - congress response obj also passed into, incase we want other data 
 function compileData(financeResponseObj, nameUserInput){
 
@@ -77,16 +71,18 @@ function compileData(financeResponseObj, nameUserInput){
       $("#repStatus").empty()
       $("#repStatus").append($("<p>").text(`${nameUserInput} is not available for comparison.`))
       console.log()
-      return
-    }
 
+      return 
+    }
     memberProfileObj =  {
 
                             name: nameUserInput,
                             cid: financeResponseObj.response.member_profile["@attributes"].member_id,
                             netHigh: financeResponseObj.response.member_profile["@attributes"].net_high,
                             netLow: financeResponseObj.response.member_profile["@attributes"].net_low,
+                            image: repImg,
                             stateName: chosenStateName, 
+                            stateInitials: chosenStateInitials,
                             stateNetWorth: chosenStateNetWorth,
                         }
     
@@ -94,7 +90,30 @@ function compileData(financeResponseObj, nameUserInput){
     $("#repStatus").empty()
     $("#repStatus").append($("<p>").text(`${nameUserInput} is available for comparison.`))
     pushToStorage(memberProfileObj)
+}
 
+function imageGrab(financeResponseObj, searchName) {
+  repImg = null
+  $.ajax({
+    url: `https://en.wikipedia.org/w/api.php?action=query&titles=${searchName.replace(" ", "%20")}&format=json&origin=*&prop=images`,
+    method: 'GET',
+  })
+  .then(function(data) {
+    for (i=0; i < Object.values(data.query.pages)[0].images.length; i++) {
+      if (Object.values(data.query.pages)[0].images[i].title.endsWith("jpg")) {
+        $.ajax({
+          url: `https://en.wikipedia.org/w/api.php?action=query&titles=${Object.values(data.query.pages)[0].images[i].title.replace(" ", "_")}&format=json&prop=imageinfo&format=json&origin=*&iiprop=url`,
+          method: 'GET',
+        })
+        .then(function(data) {
+          repImg = Object.values(Object.values(data.query.pages)[0].imageinfo)[0].url
+          compileData(financeResponseObj, searchName);
+        })
+        return
+      }
+    } 
+    compileData(financeResponseObj, searchName)
+  })
 }
 
 
