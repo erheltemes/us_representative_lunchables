@@ -85,7 +85,7 @@ var itemHouse = [
     },
     {
         state: "Iowa",
-        stateAb: "IO",
+        stateAb: "IA",
         cost: 155781,
     },
     {
@@ -265,34 +265,4 @@ var itemHouse = [
     },
 ]
 
-var lunchButton = $('#tileone')
-var teslaButton = $('#tiletwo')
-var houseButton = $('#tilethree')
-
-var chosenItemBox = $('#chosenImage')
-var itemPrice 
-
-//on click pass income variable through and divide by whichever cost, can we do housecost? 
-//populate the chosen item div
-
-$('#buttonHome').on("click", ".btn", function() {
-    chosenItemBox.empty()
-    chosenItemBox.append($("<img>").attr("src", $(this).children("img").attr("src"))
-    )
-
-    if ($(this).attr("id") === "itemHouse") {
-        itemHouse.forEach( function(object, index) {
-            if (object.stateAb.includes(chosenStateInitials)) {
-                itemPrice = object.cost
-                console.log(itemPrice)
-            }
-        })
-    }
-
-    else { 
-        itemPrice = eval($(this).attr("id")) 
-    }
-
-    propagateResultList ()
-})
 

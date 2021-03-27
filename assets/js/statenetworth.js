@@ -81,7 +81,7 @@ var stateNetWorthVar = [
     },
     {
         state: "Iowa",
-        stateAb: "IO",
+        stateAb: "IA",
         netWorth: 108512,
     },
     {

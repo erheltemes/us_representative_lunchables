@@ -7,7 +7,7 @@ var simplemaps_usmap_mapdata={
     popups: "detect",
     
 		//State defaults
-		state_description: "State description",
+		state_description: "",
     state_color: "#88A4BC",
     state_hover_color: "#3B729F",
     state_url: "",
@@ -17,7 +17,7 @@ var simplemaps_usmap_mapdata={
     all_states_zoomable: "no",
     
 		//Location defaults
-		location_description: "Location description",
+		location_description: "",
     location_color: "#FF0067",
     location_opacity: 0.8,
     location_hover_opacity: 1,
@@ -208,13 +208,6 @@ var simplemaps_usmap_mapdata={
     },
     NC: {
       name: "North Carolina",
-      description: "default",
-      color: "default",
-      hover_color: "default",
-      url: "default"
-    },
-    DC: {
-      name: "District of Columbia",
       description: "default",
       color: "default",
       hover_color: "default",
@@ -477,14 +470,6 @@ var simplemaps_usmap_mapdata={
       parent_id: "MD",
       x: "932",
       y: "303",
-      pill: "yes",
-      width: 45,
-      display: "all"
-    },
-    DC: {
-      parent_id: "DC",
-      x: "884",
-      y: "332",
       pill: "yes",
       width: 45,
       display: "all"
