@@ -5,6 +5,8 @@ var repWorth
 var repName
 var repImg
 
+var itemPrice
+
 var localSave = JSON.parse(localStorage.getItem("localSave"))
 if (localSave === null) {
     localSave = []
@@ -34,6 +36,30 @@ $("#map").on("click", function() {
 
 $(".dropdown-menu").on("click", ".dropdown-option", function() {
     apiCidCall($(this).attr("value"), $(this).text())   
+})
+
+//on click pass income variable through and divide by whichever cost
+//populate the chosen item div
+
+$('#buttonHome').on("click", ".btn", function() {
+    $('#chosenImage').empty()
+    $('#chosenImage').append($("<img>").attr("src", $(this).children("img").attr("src"))
+    )
+
+    if ($(this).attr("id") === "itemHouse") {
+        itemHouse.forEach(function(object) {
+            if (object.stateAb.includes(chosenStateInitials)) {
+                itemPrice = object.cost
+                console.log(itemPrice)
+            }
+        })
+    }
+
+    else { 
+        itemPrice = eval($(this).attr("id")) 
+    }
+
+    propagateResultList ()
 })
 
 $("#recentSearches").on("click", ".recent-search-card", function(){
