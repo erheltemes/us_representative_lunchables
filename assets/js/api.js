@@ -1,5 +1,7 @@
+//temporary varibales that are used between function
 var memberNameArray = [];
 var memberProfileArray = [];
+var repImg
 
 // API Call for Legislators 
 function apiStateCall(stateCodeInput){
@@ -18,10 +20,10 @@ function apiStateCall(stateCodeInput){
         // store parsed JSON of state legislators object
         var congressResponseObj = JSON.parse(unParsedCongressResponseObj);
 
-        // generate state legisators list 
+        // generate state legisators list (script_propagate) 
         legislatorList(congressResponseObj);
 
-        // call function to populate list on screen and wait for selection
+        // call function to populate list on screen and wait for selection (script_propagate) 
         propagateRepList(memberNameArray)
     })    
 }
@@ -37,7 +39,7 @@ function apiCidCall(cidUserInput, nameUserInput){
     }).then(function(xml){
         // function to convert xml response data to jquery object
         var financeResponseObj = xmlToJson(xml);
-        // send both response objects to function to compile data into a useable format
+        // send both reposne object and name to get image
         imageGrab(financeResponseObj, nameUserInput)    
     })
 }
@@ -63,14 +65,15 @@ function legislatorList(congressResponseObj){
 // compiles response data from finance response object into name, cid, nethigh net low - congress response obj also passed into, incase we want other data 
 function compileData(financeResponseObj, nameUserInput){
 
-    //console.log(financeResponseObj, congressResponseObj);
+    //checks if response come back with unwanted results
     if (financeResponseObj.response.member_profile["@attributes"].net_high == "0" || financeResponseObj.response.member_profile["@attributes"].net_high == "" ) {
+      //displays negative status and ends function
       $("#repStatus").empty()
       $("#repStatus").append($("<p>").text(`${nameUserInput} is not available for comparison.`)).addClass("unavailable").removeClass("available")
-      console.log()
-
       return 
     }
+
+    //object to be stored in local storage array
     memberProfileObj =  {
 
                             name: nameUserInput,
@@ -83,38 +86,65 @@ function compileData(financeResponseObj, nameUserInput){
                             stateNetWorth: chosenStateNetWorth,
                         }
     
-    memberProfileArray.push(memberProfileObj)
+    //disaplays posistive status                   
     $("#repStatus").empty()
     $("#repStatus").append($("<p>").text(`${nameUserInput} is available for comparison.`)).addClass("available").removeClass("unavailable")
+
+    //calls function to handle push to storage
     pushToStorage(memberProfileObj)
+
+    //displays 3 items
     $("#itemChoice").removeClass("hiddenItem").addClass("shownItem")
 }
 
 function imageGrab(financeResponseObj, searchName) {
+  //sets defualt img 
   repImg = "assets/pictures/gary500x500.jpg"
+
+  //api call to get list of potential image titles
   $.ajax({
     url: `https://en.wikipedia.org/w/api.php?action=query&titles=${searchName.replace(" ", "%20")}&format=json&origin=*&prop=images`,
     method: 'GET',
   })
   .then(function(data) {
-    console.log(Object.values(data.query.pages)[0].images)
+    //if respones is not undefined continue
     if (Object.values(data.query.pages)[0].images != undefined) {    
-      for (i=0; i < Object.values(data.query.pages)[0].images.length; i++) {
-        if (Object.values(data.query.pages)[0].images[i].title.endsWith("jpg")) {
-          $.ajax({
-            url: `https://en.wikipedia.org/w/api.php?action=query&titles=${Object.values(data.query.pages)[0].images[i].title.replace(" ", "_")}&format=json&prop=imageinfo&format=json&origin=*&iiprop=url`,
-            method: 'GET',
-          })
-          .then(function(data) {
-            repImg = Object.values(Object.values(data.query.pages)[0].imageinfo)[0].url
-            compileData(financeResponseObj, searchName);
-          return 
-          })
-        }
-      } 
+      //if function retruns true, then a new image was selected
+      if (jpgSearch(data, financeResponseObj, searchName)) {
+        return 
+      }
+
+      // if response is defined but none are jpg
+      else {
+        compileData(financeResponseObj, searchName)
+        console.log("was defined but no jpg")
+      }
     }
-    else {compileData(financeResponseObj, searchName)}  
+    //if response is undefined
+    else {compileData(financeResponseObj, searchName) 
+        console.log("was not defined")
+    }
   })
+}
+
+function jpgSearch(data, financeResponseObj, searchName) {
+  // loops through result until one ends in jpg, 
+  for (i=0; i < Object.values(data.query.pages)[0].images.length; i++) {
+    if (Object.values(data.query.pages)[0].images[i].title.endsWith("jpg")) {
+      //api call to get jpg link
+      $.ajax({
+        url: `https://en.wikipedia.org/w/api.php?action=query&titles=${Object.values(data.query.pages)[0].images[i].title.replace(" ", "_")}&format=json&prop=imageinfo&format=json&origin=*&iiprop=url`,
+        method: 'GET',
+      })
+      .then(function(data) {
+        repImg = Object.values(Object.values(data.query.pages)[0].imageinfo)[0].url
+        compileData(financeResponseObj, searchName);
+        console.log("hit jpg")
+        return 
+      })
+      return true
+    }
+  } 
 }
 
 
