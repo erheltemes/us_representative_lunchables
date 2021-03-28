@@ -1,38 +1,53 @@
+//global variables that define page state
 var chosenStateName
 var chosenStateInitials
 var chosenStateNetWorth
 var repWorth
 var repName
-var repImg
 
 var itemPrice
 
+//parse local storage or create new array
 var localSave = JSON.parse(localStorage.getItem("localSave"))
 if (localSave === null) {
     localSave = []
 }
+
 //create recent search on load
 propagateRecentSearch()
 
 //sets choosenStateInitials etc
 $("#map").on("click", function() {
+
+    //sets current display state
     $("#repList").addClass("hiddenItem").removeClass("shownItem")
     $("#resultContainer").addClass("hiddenItem").removeClass("shownItem")
     $("#itemChoice").addClass("hiddenItem").removeClass("shownItem")
+
+    //this html element is constantly updated within the map based on posistion of click on the entire div of the map
     chosenStateName = $(".tt_name_sm").text()
+
+    //navigating through object in html5usmapv4.0_branded/mapdata to match state name to a value and then use its key 
     Object.values(simplemaps_usmap_mapdata.state_specific).forEach(function(object, index) {
         if (object.name == $(".tt_name_sm").text()) {
             chosenStateInitials = (Object.keys(simplemaps_usmap_mapdata.state_specific)[index])
-            stateNetWorthVar.forEach( function(object, index) {
-                if (object.stateAb.includes(chosenStateInitials)) {
-                    chosenStateNetWorth = object.netWorth
-                }
-            })
-            $("#repStatus").empty()
-            apiStateCall(chosenStateInitials)
         }
     })
+
+    //setting state net worth by matching intials to object located in statenetworth.js
+    stateNetWorthVar.forEach( function(object) {
+        if (object.stateAb.includes(chosenStateInitials)) {
+            chosenStateNetWorth = object.netWorth
+        }
+    })
+
+    //empty list prior to call
+    $("#repStatus").empty()
+
+    //located in api.js
+    apiStateCall(chosenStateInitials)
 })
+
 
 $(".dropdown-menu").on("click", ".dropdown-option", function() {
     apiCidCall($(this).attr("value"), $(this).text())   
