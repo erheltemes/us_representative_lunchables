@@ -1,5 +1,7 @@
+//temporary varibales that are used between function
 var memberNameArray = [];
 var memberProfileArray = [];
+var repImg
 
 // API Call for Legislators 
 function apiStateCall(stateCodeInput){
