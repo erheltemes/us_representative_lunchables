@@ -49,7 +49,7 @@ Select your state, choose a representative and then select and item to compare w
 https://github.com/erheltemes/us_representative_lunchables
 
 ## GIT HUB LIVE SITE
-https://erheltemes.github.io/us_representative_lunchables/
+https://erheltemes.github.io/us_representative_net_worth/
 
 ## SCREENSHOTS
 
