@@ -29,7 +29,7 @@ THEN the layout should rearrange to be easier to read depending on screen size
 ## Description 
 An interactive experience, with cultural relevance. Goal: To illustrate the wealth disparity between congress representatives and their constituents. This web application will display a humorous comparison between common items a representative can afford vs what their constituents can afford.
 
-Select your state, choose a representative and then select and item to compare what the selected representative can afford vs their constituants. 
+Select your state, choose a representative and then select an item to compare what the selected representative can afford vs. their constituants. 
 
 ## Technologies Used
 ```
