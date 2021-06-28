@@ -59,5 +59,7 @@ https://erheltemes.github.io/us_representative_net_worth/
 
 ## Contributors 
 Eric Heltemes
+
 Adam Natrop
+
 Najua Saad
